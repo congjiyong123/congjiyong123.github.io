@@ -1,82 +1,85 @@
+<!DOCTYPE html>
 <html>
-
 <head>
-    <meta charset="utf-8">
-    <style>
-        * {
-            margin: 0px;
-            padding: 0px;
-            text-decoration: none;
-        }
-        
-        ul {
-            list-style-type: none;
-            text-align: center;
-            margin: 0px auto;
-        }
-        
-        ul li {
-            margin: 0px auto;
-            width: 50px;
-            height: 30px;
-            line-height: 30px;
-            float: left;
-            margin: auto;
-        }
-        
-        a {
-            text-align: center;
-            color: #fff;
-        }
-        
-        .wrapper .content ul li:hover {
-            background-color: red;
-            -webkit-transition:color 200ms;
-            -o-transition:color 200ms;
-            transition:color 200ms;
-        }
-        
-        .wrapper {
-            height: 30px;
-            background-color: #fff;
-            font-size: 13;
-        }
-        
-        .content {
-            margin: 0 auto;
-            width: 800px;
-            height: 30px;
-            background-color: #f40;
-        }
-    </style>
-
-
-
+	<title>德玛西亚</title>
+	<meta charset="utf-8">
 </head>
+<script type="text/javascript">
 
+    window.onload = function(){
+        //获取画布对象
+        var canvas = document.getElementById("canvas");
+        //获取画布的上下文
+        var context =canvas.getContext("2d");
+        //获取浏览器屏幕的宽度和高度
+        var W = window.innerWidth;
+        var H = window.innerHeight;
+        //设置canvas的宽度和高度
+        canvas.width = W;
+        canvas.height = H;
+        //每个文字的字体大小
+        var fontSize = 14;
+        //计算列
+        var colunms = Math.floor(W /fontSize);  
+        //记录每列文字的y轴坐标
+        var drops = [];
+        //给每一个文字初始化一个起始点的位置
+        for(var i=0;i<colunms;i++){
+            drops.push(0);
+        }
+
+        //运动的文字
+        var str ="javascript html5 canvas";
+        //4:fillText(str,x,y);原理就是去更改y的坐标位置
+        //绘画的函数
+        function draw(){
+            context.fillStyle = "rgba(0,0,0,0.05)";
+            context.fillRect(0,0,W,H);
+            //给字体设置样式
+            context.font = "700 "+fontSize+"px  微软雅黑";
+            //给字体添加颜色
+            context.fillStyle ="#0effff";//可以rgb,hsl, 标准色，十六进制颜色
+            //写入画布中
+            for(var i=0;i<colunms;i++){
+                var index = Math.floor(Math.random() * str.length);
+                var x = i*fontSize;
+                var y = drops[i] *fontSize;
+                context.fillText(str[index],x,y);
+                //如果要改变时间，肯定就是改变每次他的起点
+                if(y >= canvas.height && Math.random() > 0.99){
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        };
+
+
+        draw();
+        setInterval(draw,30);
+    };
+
+</script>
+
+<style>
+*{padding:0;
+margin:0;}
+html{
+	overflow:hidder;
+}
+
+</style>
 <body>
+<!-- <audio autoplay="autoplay" loop="loop" preload="auto"            	src="http://demo.mimvp.com/html5/take_you_fly.mp3">      		你的浏览器版本太低，不支持audio标签	</audio>
+ -->
+<audio autoplay="autoplay"  preload="auto" src="http://fs.w.kugou.com/201810291022/a3251f1bf0b888aaa081edd727d454cc/G079/M09/11/0D/L5QEAFhaLyCAJJv3ADqN45hBPKc616.mp3" preload="auto">
+           
+        </audio>
 
 
-    <div class="wrapper">
 
-        <div class="content">
 
-            <ul>
-                <li><a href="default.asp">网页</a></li>
-                <li><a href="new.asp">咨询</a></li>
-                <li><a href="contact.asp">贴吧</a></li>
-                <li><a href="about.asp">视频</a></li>
-                <li><a href="about.asp">音乐</a></li>
-                <li><a href="about.asp">图片</a></li>
-                <li><a href="about.asp">地图</a></li>
-                <li><a href="about.asp">文库</a></li>
-            </ul>
-        </div>
-    </div>
+<canvas id="canvas" style="background:#000">
 
+        </audio>
 </body>
-
-
-
-
 </html>
