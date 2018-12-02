@@ -18,9 +18,9 @@
     <title>登陆</title>
     <style>
         body {
-        	background-size:cover;
+            background-size: cover;
             background-color: #e0ffff;
-            background-image:url(1.jpg);
+            background-image: url(1.jpg);
         }
         
         #top_top {
@@ -36,65 +36,46 @@
 </head>
 <script>
     function jc() {
-
-        flag = true;
         var username = document.getElementById("username");
         var username_value = username.value;
-        if (username_value == "") {
-            alert("请输入用户名：")
-            flag = false;
-        } else {
-            if (username_value.length > 16 || username_value.length < 8) {
-                alert("用户名长度为8-16！");
-                flag = false;
-            }
-        }
-        flag = true;
         var password = document.getElementById("password");
         var password_value = password.value;
-        if (password_value == "") {
-            alert("请输入密码");
-            flag = false;
-        } else {
-            if (password_value.length > 16 || password_value.length < 8) {
-                alert("密码长度为8-16");
-                flag = false;
-            } else {
-                var result = new Array(username_value.split(""));
-                for (var i = 0; i < result.length; i++) {
-                    if (result[i].indexOf("*", 0) !== -1) {
-                        flag = false;
-                        alert("不能输入特殊符号*哦！");
-
-                    }
-                    if (result[i].indexOf("#", 0) !== -1) {
-                        flag = false;
-                        alert("不能输入特殊符号#哦！");
-
-                    }
-
+        if (guize(username_value) == 1) {
+            if (guize(password_value) == 1) {
+                if (teshu(username_value) == 1 && teshu(password_value) == 1) {
+                    // alert("登陆成功！");
+                    document.submit();
                 }
-                var result1 = new Array(password_value.split(""));
-                for (var i = 0; i < result1.length; i++) {
-                    if (result1[i].indexOf("*", 0) !== -1) {
-                        flag = false;
-                        alert("不能输入特殊符号*哦！");
-
-                    }
-                    if (result1[i].indexOf("#", 0) !== -1) {
-                        flag = false;
-                        alert("不能输入特殊符号#哦");
-
-                    }
-                }
-            }
-            if (flag == true) {
-                alert("登陆成功！");
-                document.submit();
-
             }
         }
     }
+    function guize(number) {
+        if (number == "") {
+            alert("不能为空哦！：");
+            return 0;
+        } else {
+            if (number.length > 16 || number.length < 8) {
+                alert("长度为8-16！");
+                return 0;
+            }
+        }
+        return 1;
+    }
+    function teshu(number1) {
+        var result1 = new Array(number1.split(""));
+        for (var i = 0; i < result1.length; i++) {
+            if (result1[i].indexOf("*", 0) !== -1) {
+                alert("不能输入特殊符号*哦！");
+                return 0;
+            }
+            if (result1[i].indexOf("#", 0) !== -1) {
+                alert("不能输入特殊符号#哦");
+                return 0;
+            }
+        }
+        return 1;
+    }
+
 
 
 
@@ -111,56 +92,30 @@
 </script>
 
 <body style="margin-top:30%">
-
-
     <div class="container">
         <div class="row clearfix">
             <div class="col-md-12 column">
-
-
-
                 <form>
                     <center>
-                        <div class="container" id="top_top">
+                        <div class="container " id="top_top">
                             <div class="jumbotron">
                                 <table align=center border=0px>
                                     <tr>
                                         <td class="td_td">学&nbsp;&nbsp;号:</td>
-                                        <td>
-                                            <input type="text" class="form-control"  name="username" id="username">
-                                        </td>
+                                        <td><input type="text" class="form-control" name="username" id="username"></td>
                                     </tr>
                                     <tr>
-
                                         <td class="td_td">密&nbsp;&nbsp;码:</td>
-                                        <td><input type="text" class="form-control"  name="password" id="password"></td>
+                                        <td><input type="text" class="form-control" name="password" id="password"></td>
                                     </tr>
                                     <tr align=center>
-
-
                                         <td colspan="2"><input type="button" class="btn btn-info" value="登陆" onclick=jc()>&nbsp;<input type="button" class="btn btn-info" value="注册" onclick="window.open('zhuce.html')"></td>
                                     </tr>
                             </div>
                         </div>
-
-
             </div>
-
         </div>
-
     </div>
-    <!--<h1>��ӭע��qq</h1>
-<a>�˺�:</a>
-<input type="text">*
-<br>
-<br>
-<a>����:</a>
-<input type="text">*
-<br>
-<br>
-<input type="button" onclick=alert("ע��ɹ�") value="ע��">
--->
-
     </form>
     </table>
     <hr>
@@ -168,8 +123,6 @@
         <a href="#" class="close" data-dismiss="alert">&times;</a>
         <strong>提示！</strong>长度为8-16！输入*或#有惊喜哦！。
     </div>
-
-
 </body>
 
 
